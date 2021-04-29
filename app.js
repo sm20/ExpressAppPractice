@@ -16,7 +16,7 @@ var app = express();    //initialize with zero parameter constructor
 app.set('views', path.join(__dirname, 'views'));    //set the 'views' setting to point to the directory
 app.set('view engine', 'pug');
 
-// uncomment after placing your favicon in /public
+// middleware to set websites favicon
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
 //middleware to log requests
@@ -26,11 +26,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-//middleware to serve static resources in the public folder
+//middleware to serve the static resources in the public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+//app.use('/', routes);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -62,6 +62,8 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
+
+//set server to listen on a port
 
 app.set('port', process.env.PORT || 3000);
 
