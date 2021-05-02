@@ -13,11 +13,11 @@ var users = require('./routes/users');
 var app = express();    //initialize with zero parameter constructor
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));    //set the 'views' setting to point to the directory
-app.set('view engine', 'pug');
+//app.set('views', path.join(__dirname, 'views'));    //set the 'views' setting to point to the directory
+//app.set('view engine', 'pug');
 
 // middleware to set websites favicon
-app.use(favicon(__dirname + '/public/favicon.ico'));
+//app.use(favicon(__dirname + '/public/favicon.ico'));
 
 //middleware to log requests
 app.use(logger('dev')); //initialize using constructor that takes in parameter
@@ -27,7 +27,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //middleware to serve the static resources in the public folder
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, resp) => { resp.send("Home Page"); });
 
 //app.use('/', routes);
 //app.use('/users', users);
