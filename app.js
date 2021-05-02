@@ -31,18 +31,38 @@ var app = express();    //initialize with zero parameter constructor
 //middleware to serve the static resources in the public folder
 //app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.get('/', (req, res) => 
-    res.send('<h1>Home Page</h1>'
+    res.status(200).send('<h1>Home Page</h1>'
                 + '<a href="/api/products"> Products</a><br>'
-                + '<a href="/api/products/discounted"> Discounted Products</a>')
+                + '<a href="/api/discounted"> Discounted Products</a>')
 )
 
-app.get('/api/products', (req, res) => res.json(products) )
-
-app.get('/api/products/discounted', (req, res) => {
-    const discProducts = products.filter((item) => ((item["price"] % 1).toFixed(2)) == 0.99);
-    res.json(discProducts);
+//app.get('/api/products', (req, res) => res.status(200).json(products) )
+app.get('/api/products', (req, res) => {
+    let serveProd = '';
+    products.forEach((prod) => {
+        serveProd += '<a href="/api/products/' + prod.id + '">' + prod.name + '</a><br>'
+    })
+    res.status(200).send(serveProd)
 })
+
+app.get('/api/products/:prodID', (req, res) => {
+    const { prodID } = req.params
+    const foundItem = products.find((item) => item.id === Number(prodID))
+
+    if (!foundItem) {
+        res.status(200).send('No Such Product Exists!')
+    }
+    res.status(200).json(foundItem);
+})
+
+app.get('/api/discounted', (req, res) => {
+    const discProducts = products.filter((item) => ((item["price"] % 1).toFixed(2)) == 0.99);
+    res.status(200).json(discProducts);
+})
+
+
 
 //app.use('/', routes);
 //app.use('/users', users);
