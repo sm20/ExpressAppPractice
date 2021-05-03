@@ -11,6 +11,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var people = require('./routes/people');
 var products = require('./routes/products');
+var discounted = require('./routes/discounted');
 
 var app = express();    //initialize with zero parameter constructor
 
@@ -43,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/api/test', people);
 app.use('/api/products', products);
+app.use('/api/discounted', discounted);
 //app.use('/users', users);
 
 

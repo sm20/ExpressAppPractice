@@ -35,6 +35,9 @@
     <Content Include="data.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="routes\discounted.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="routes\people.js">
       <SubType>Code</SubType>
     </Content>

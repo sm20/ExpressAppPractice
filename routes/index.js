@@ -15,7 +15,7 @@ var router = express.Router();
 router.get('/', (req, res) =>
     res.status(200).send('<h1>Home Page</h1>'
         + '<a href="/api/products"> Products</a><br>'
-        + '<a href="/api/products/discounted"> Discounted Products</a>')
+        + '<a href="/api/discounted"> Discounted Products</a>')
 )
 
 module.exports = router;

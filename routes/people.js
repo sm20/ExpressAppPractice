@@ -6,13 +6,13 @@ var { people } = require('../data');
 
 
 //example post request
-router.post('/api/test', (req, res) => {
+router.post('/', (req, res) => {
     const { id, name } = req.body;   //request payload should include these json keys
     res.status(202).json({ success: true, data: id, name }); //or just send 'data: req.body'
 })
 
 //example put request using query parameters
-router.put('/api/test', (req, res) => {
+router.put('/', (req, res) => {
     const { qid, qname } = req.query
     console.log(qid)
     const { id, name } = req.body
@@ -26,7 +26,7 @@ router.put('/api/test', (req, res) => {
 })
 
 //example delete request using path/route parameters
-router.delete('/api/test/:pid', (req, res) => {
+router.delete('/:pid', (req, res) => {
     const exists = people.find((person) => person.id === Number(req.params.pid))
 
     if (exists)
