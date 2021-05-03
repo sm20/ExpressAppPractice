@@ -14,7 +14,7 @@ An example application demonstrating the implementation of a REST API. Most of t
 	-	`npm start`
 	-	From your browser, navigate to: [http://localhost:3000/](http://localhost:3000/)
 
-You can now test the application using (Postman)[https://www.postman.com/downloads/] and the URL above
+You can now test the application using [Postman](https://www.postman.com/downloads/) and the URL above
 
 # API Documentation
 
