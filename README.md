@@ -11,7 +11,7 @@ An example application demonstrating the implementation of a REST API. Most of t
 	-	Clone, or Fork, or Download the repository
 	-	From the root of the Project Directory, in the CLI, execute the following commands:
 		-	`npm install`
-		-	`npm app`
+		-	`npm start`
 		-	From your browser, navigate to: [http://localhost:3000/](http://localhost:3000/)
 
 You can now test the application using (Postman)[https://www.postman.com/downloads/] and the URL above
