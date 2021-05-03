@@ -14,12 +14,15 @@ var { products, people } = require('./data');
 
 var app = express();    //initialize with zero parameter constructor
 
+/*
 // view engine setup
-//app.set('views', path.join(__dirname, 'views'));    //set the 'views' setting to point to the directory
-//app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));    //set the 'views' setting to point to the directory
+app.set('view engine', 'pug');
 
 // middleware to set websites favicon
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
+*/
+
 
 //middleware to log requests
 app.use(logger('dev')); //initialize using constructor that takes in parameter
@@ -28,12 +31,15 @@ app.use(logger('dev')); //initialize using constructor that takes in parameter
 app.use(bodyParser.json()); //parse incoming payloads of json type
 app.use(bodyParser.urlencoded({ extended: false })); //parse incoming payloads of url-encoded type (form data)
 
-//parse incoming cookie header (http) and populate req.cookies property
+//middleware to parse incoming cookie header (http) and populate req.cookies property
 app.use(cookieParser());
 
+/*
 //middleware to serve the static resources in the public folder
-//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
+*/
 
+//example GET requests
 
 app.get('/', (req, res) => 
     res.status(200).send('<h1>Home Page</h1>'
@@ -65,7 +71,35 @@ app.get('/api/discounted', (req, res) => {
     res.status(200).json(discProducts);
 })
 
+//example post request
+app.post('/api/test', (req,res) => {
+    const { id, name } = req.body;   //request payload should include these json keys
+    res.status(202).json({success: true, data: id, name}); //or just send 'data: req.body'
+})
 
+//example put request using query parameters
+app.put('/api/test', (req, res) => {
+    const { qid, qname } = req.query
+    console.log(qid)
+    const { id, name } = req.body
+
+    if (Number(qid) !== 4)
+        return res.status(200).json({ success: false, msg: 'id not on file' })
+    if (qname !== 'Cynthia')
+        return res.status(200).json({ success: false, msg: 'name not on file' })
+
+    res.status(200).json({ sucess: true, msg: 'Information Updated', data: {id, name} })
+})
+
+//example delete request using path/route parameters
+app.delete('/api/test/:pid', (req, res) => {
+    const exists = people.find((person) => person.id === Number(req.params.pid))
+
+    if (exists)
+        return res.status(200).json({ success: true, msg: `person with id:${req.params.pid} deleted` })
+
+    res.status(200).json({ success: false, msg: 'Person does not exist' })
+})
 
 
 //app.use('/', routes);
