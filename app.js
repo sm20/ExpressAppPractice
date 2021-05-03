@@ -22,11 +22,14 @@ var app = express();    //initialize with zero parameter constructor
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
 //middleware to log requests
-/*app.use(logger('dev')); //initialize using constructor that takes in parameter*/
+app.use(logger('dev')); //initialize using constructor that takes in parameter
 
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(cookieParser());
+//middleware to parse incoming request 'bodies' and make them available in the property(req.body)
+app.use(bodyParser.json()); //parse incoming payloads of json type
+app.use(bodyParser.urlencoded({ extended: false })); //parse incoming payloads of url-encoded type (form data)
+
+//parse incoming cookie header (http) and populate req.cookies property
+app.use(cookieParser());
 
 //middleware to serve the static resources in the public folder
 //app.use(express.static(path.join(__dirname, 'public')));
@@ -61,6 +64,7 @@ app.get('/api/discounted', (req, res) => {
     const discProducts = products.filter((item) => ((item["price"] % 1).toFixed(2)) == 0.99);
     res.status(200).json(discProducts);
 })
+
 
 
 
