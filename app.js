@@ -9,8 +9,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
-var { products, people } = require('./data');
+var people = require('./routes/people');
+var products = require('./routes/products');
 
 var app = express();    //initialize with zero parameter constructor
 
@@ -39,71 +39,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 */
 
-//example GET requests
-
-app.get('/', (req, res) => 
-    res.status(200).send('<h1>Home Page</h1>'
-                + '<a href="/api/products"> Products</a><br>'
-                + '<a href="/api/discounted"> Discounted Products</a>')
-)
-
-//app.get('/api/products', (req, res) => res.status(200).json(products) )
-app.get('/api/products', (req, res) => {
-    let serveProd = '';
-    products.forEach((prod) => {
-        serveProd += '<a href="/api/products/' + prod.id + '">' + prod.name + '</a><br>'
-    })
-    res.status(200).send(serveProd)
-})
-
-app.get('/api/products/:prodID', (req, res) => {
-    const { prodID } = req.params
-    const foundItem = products.find((item) => item.id === Number(prodID))
-
-    if (!foundItem) {
-        res.status(200).send('No Such Product Exists!')
-    }
-    res.status(200).json(foundItem);
-})
-
-app.get('/api/discounted', (req, res) => {
-    const discProducts = products.filter((item) => ((item["price"] % 1).toFixed(2)) == 0.99);
-    res.status(200).json(discProducts);
-})
-
-//example post request
-app.post('/api/test', (req,res) => {
-    const { id, name } = req.body;   //request payload should include these json keys
-    res.status(202).json({success: true, data: id, name}); //or just send 'data: req.body'
-})
-
-//example put request using query parameters
-app.put('/api/test', (req, res) => {
-    const { qid, qname } = req.query
-    console.log(qid)
-    const { id, name } = req.body
-
-    if (Number(qid) !== 4)
-        return res.status(200).json({ success: false, msg: 'id not on file' })
-    if (qname !== 'Cynthia')
-        return res.status(200).json({ success: false, msg: 'name not on file' })
-
-    res.status(200).json({ sucess: true, msg: 'Information Updated', data: {id, name} })
-})
-
-//example delete request using path/route parameters
-app.delete('/api/test/:pid', (req, res) => {
-    const exists = people.find((person) => person.id === Number(req.params.pid))
-
-    if (exists)
-        return res.status(200).json({ success: true, msg: `person with id:${req.params.pid} deleted` })
-
-    res.status(200).json({ success: false, msg: 'Person does not exist' })
-})
-
-
-//app.use('/', routes);
+//middleware to route to api end points
+app.use('/', routes);
+app.use('/api/test', people);
+app.use('/api/products', products);
 //app.use('/users', users);
+
 
 // catch 404 and forward to error handler
 /*app.use(function (req, res, next) {
