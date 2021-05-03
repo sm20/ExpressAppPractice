@@ -2,6 +2,8 @@
 var express = require('express');
 var router = express.Router();
 
+const getHomepage = require('../controllers/index')
+
 /*var getData = function() {
     var data = {
         'item1': 'http://public-domain-photos.com/free-stock-photos-1/flowers/cactus-76.jpg',
@@ -12,10 +14,6 @@ var router = express.Router();
 }*/
 
 /* GET home page. */
-router.get('/', (req, res) =>
-    res.status(200).send('<h1>Home Page</h1>'
-        + '<a href="/api/products"> Products</a><br>'
-        + '<a href="/api/discounted"> Discounted Products</a>')
-)
+router.get('/', getHomepage)
 
 module.exports = router;

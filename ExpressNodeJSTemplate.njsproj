@@ -32,6 +32,18 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="app.js" />
+    <Content Include="controllers\discounted.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="controllers\index.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="controllers\people.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="controllers\products.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="data.js">
       <SubType>Code</SubType>
     </Content>
@@ -53,6 +65,7 @@
     <Content Include="views\error.pug" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="controllers\" />
     <Folder Include="public\" />
     <Folder Include="routes\" />
     <Folder Include="views\" />
