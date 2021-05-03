@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "New Collection",
+    "contact": {}
+  },
+  "host": "localhost:1337",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Serve the HTML for the home page",
+        "summary": "HomePage",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "HomePage",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/products": {
+      "get": {
+        "description": "Serve the HTML displaying the list of available products",
+        "summary": "Products",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Products",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/products/1": {
+      "get": {
+        "description": "Retrieve json for a single product using route parameters",
+        "summary": "Product",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Product",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/discounted": {
+      "get": {
+        "description": "Get the list of discounted items that exist (those items ending in 99 cents).",
+        "summary": "Discounted",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Discounted",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/test": {
+      "put": {
+        "description": "Update the id and name of an existing person using query parameters",
+        "summary": "Person",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Person",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "qid",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "qname",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new person with id and name",
+        "summary": "Person",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "PostPerson",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PersonRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/test/3": {
+      "delete": {
+        "description": "Delete a person using their id",
+        "summary": "Person",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "DeletePerson",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PersonRequest": {
+      "title": "PersonRequest",
+      "example": {
+        "id": "2",
+        "name": "David"
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "73d0f20c-e815-4a7f-aba2-5153b7270644",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HomePage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1337/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1337",
+					"path": [
+						""
+					]
+				},
+				"description": "Serve the HTML for the home page"
+			},
+			"response": []
+		},
+		{
+			"name": "Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1337/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1337",
+					"path": [
+						"api",
+						"products"
+					]
+				},
+				"description": "Serve the HTML displaying the list of available products"
+			},
+			"response": []
+		},
+		{
+			"name": "Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1337/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1337",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				},
+				"description": "Retrieve json for a single product using route parameters"
+			},
+			"response": []
+		},
+		{
+			"name": "Discounted",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1337/api/discounted",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1337",
+					"path": [
+						"api",
+						"discounted"
+					]
+				},
+				"description": "Get the list of discounted items that exist (those items ending in 99 cents)."
+			},
+			"response": []
+		},
+		{
+			"name": "Person",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1337/api/test?qid=4&qname=Cynthia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1337",
+					"path": [
+						"api",
+						"test"
+					],
+					"query": [
+						{
+							"key": "qid",
+							"value": "4"
+						},
+						{
+							"key": "qname",
+							"value": "Cynthia"
+						}
+					]
+				},
+				"description": "Update the id and name of an existing person using query parameters"
+			},
+			"response": []
+		},
+		{
+			"name": "Person",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"2\",\r\n    \"name\":\"David\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1337/api/test/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1337",
+					"path": [
+						"api",
+						"test",
+						""
+					]
+				},
+				"description": "Create a new person with id and name"
+			},
+			"response": []
+		},
+		{
+			"name": "Person",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1337/api/test/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1337",
+					"path": [
+						"api",
+						"test",
+						"3"
+					]
+				},
+				"description": "Delete a person using their id"
+			},
+			"response": []
+		}
+	]
+}
