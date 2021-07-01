@@ -12,6 +12,7 @@ var users = require('./routes/users');
 var people = require('./routes/people');
 var products = require('./routes/products');
 var discounted = require('./routes/discounted');
+var invoice = require('./routes/invoice');
 
 var app = express();    //initialize with zero parameter constructor
 
@@ -45,6 +46,7 @@ app.use('/', routes);
 app.use('/api/test', people);
 app.use('/api/products', products);
 app.use('/api/discounted', discounted);
+app.use('/api/invoice', invoice)
 //app.use('/users', users);
 
 
