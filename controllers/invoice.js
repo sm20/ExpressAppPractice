@@ -50,6 +50,7 @@ const getInvoice = (req, res) => {
 
     //Email Invoice
 
+    //create email transporter
     var mail = nodemailer.createTransport({
         service: 'hotmail',
         auth: {
@@ -58,6 +59,7 @@ const getInvoice = (req, res) => {
         }
     });
 
+    //set email body
     var mailOptions = {
         from: 'test0932843092@outlook.com',
         to: `${email}`,
@@ -70,6 +72,7 @@ const getInvoice = (req, res) => {
         }]
     };
 
+    //send email using transporter
     mail.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
