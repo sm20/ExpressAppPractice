@@ -1,8 +1,9 @@
-const PDFDocument = require('pdfkit');  //pdfkit module
+const PDFDocument = require('pdfkit');  //pdfkit module for pdf generation
 const fs = require('fs');   //filesystem module
-//var { products } = require('../data');
+var nodemailer = require('nodemailer'); //email with attachments
 
-//end point to create the invoice, email the invoice, and let the user know the invoice has been created
+
+//end point to create and email the invoice
 const getInvoice = (req, res) => {
 
     //request payload should include these json keys
@@ -47,13 +48,41 @@ const getInvoice = (req, res) => {
 
     doc.end();
 
+    //Email Invoice
+
+    var mail = nodemailer.createTransport({
+        service: 'hotmail',
+        auth: {
+            user: 'test0932843092@outlook.com',
+            pass: 'Ytgc4!LfYXLO'
+        }
+    });
+
+    var mailOptions = {
+        from: 'test0932843092@outlook.com',
+        to: 'test0932843092@outlook.com',
+        subject: 'Sending Email via Node.js',
+        text: 'That was easy!',
+        attachments: [{
+            //file on disk as an attachment
+            filename: 'invoice.pdf',
+            path: 'invoice/invoice.pdf'
+        }]
+    };
+
+    mail.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+
     //response to send back to requester
     res.status(202).json({
         success: true,
         msg: `Invoice for ${firstName} ${lastName} emailed to ${email}`
     });
-
-    //Email Invoice
 
 }
 
