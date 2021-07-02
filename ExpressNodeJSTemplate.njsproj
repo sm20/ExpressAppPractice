@@ -50,6 +50,7 @@
     <Content Include="data.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="invoice\invoice.pdf" />
     <Content Include="public\GElogo.jpg" />
     <Content Include="routes\discounted.js">
       <SubType>Code</SubType>
@@ -73,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="controllers\" />
+    <Folder Include="invoice\" />
     <Folder Include="public\" />
     <Folder Include="routes\" />
     <Folder Include="views\" />

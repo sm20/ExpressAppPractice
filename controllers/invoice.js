@@ -16,7 +16,7 @@ const getInvoice = (req, res) => {
 
     //Create initial PDF file
     const doc = new PDFDocument({ size: 'LETTER' });    //new instance of PDFDocument class
-    doc.pipe(fs.createWriteStream('invoice.pdf'));  //save pdf file in root directory of project
+    doc.pipe(fs.createWriteStream('invoice/invoice.pdf'));  //save pdf file in folder: projectRoot/invoice/
 
 
     //populate PDF file
@@ -55,9 +55,6 @@ const getInvoice = (req, res) => {
 
     //Email Invoice
 
-    //Provide Invoice to the user as HTML, as well as a prompt that shows that the email has been sent
-    let serveProd = '';
-    res.status(200).send('<p>Test Invoice</p>')
 }
 
 module.exports = {
