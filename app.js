@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //middleware to route to api end points
-app.use('/', routes);
+app.use('/', routes);   //index file in routes folder
 app.use('/api/test', people);
 app.use('/api/products', products);
 app.use('/api/discounted', discounted);

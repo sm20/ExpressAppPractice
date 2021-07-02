@@ -4,7 +4,7 @@ var nodemailer = require('nodemailer'); //email with attachments
 
 
 //end point to create and email the invoice
-const getInvoice = (req, res) => {
+const emailInvoice = (req, res) => {
 
     //request payload should include these json keys
     const { invNum } = req.body;    //invoice number
@@ -96,5 +96,5 @@ const getInvoice = (req, res) => {
 }
 
 module.exports = {
-    getInvoice
+    emailInvoice
 }
