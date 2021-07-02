@@ -48,6 +48,9 @@ const getInvoice = (req, res) => {
 
     doc.end();
 
+
+
+
     //Email Invoice
 
     //create email transporter
@@ -80,6 +83,9 @@ const getInvoice = (req, res) => {
             console.log('Email sent: ' + info.response);
         }
     });
+
+
+
 
     //response to send back to requester
     res.status(202).json({
