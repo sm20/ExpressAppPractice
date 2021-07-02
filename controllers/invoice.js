@@ -60,9 +60,9 @@ const getInvoice = (req, res) => {
 
     var mailOptions = {
         from: 'test0932843092@outlook.com',
-        to: 'test0932843092@outlook.com',
-        subject: 'Sending Email via Node.js',
-        text: 'That was easy!',
+        to: `${email}`,
+        subject: 'Your Session Invoice',
+        text: 'Your Invoice for your session is attached.',
         attachments: [{
             //file on disk as an attachment
             filename: 'invoice.pdf',
