@@ -5,9 +5,9 @@ const fs = require('fs');   //filesystem module
 //end point to create the invoice, email the invoice, and let the user know the invoice has been created
 const getInvoice = (req, res) => {
 
-    //Create PDF file
-    //const doc = new PDFDocument;    //instance of PDFDocument class
-    //doc.pipe(fs.createWriteStream('invoice.pdf'));  //save pdf file in root directory
+    //Create initial PDF file
+    const doc = new PDFDocument;    //instance of PDFDocument class
+    doc.pipe(fs.createWriteStream('invoice.pdf'));  //save pdf file in root directory
 
     //populate PDF file
 
