@@ -29,5 +29,5 @@ You can now test the application using (Postman)[https://www.postman.com/downloa
 # API Documentation
 
 - The documentaion can be found in the API folder. Various formats are provided
-- The documentation showing the sample request for an invoice can be found [Here](https://github.com/sm20/ExpressAppPractice/blob/invoiceGen/API/API%20Doc%20-%20Invoice.pdf) 
-	-	An example of the resulting generated PDF invoice that is emailed can be found [Here](https://github.com/sm20/ExpressAppPractice/blob/invoiceGen/invoice/invoice.pdf) 
+- The documentation showing the sample request for an invoice can be found [Here](https://github.com/sm20/ExpressAppPractice/blob/invoiceGen/API/Sample%20Invoice%20Post%20Request%20JSON.pdf) 
+- An example of the resulting generated PDF invoice that is emailed can be found [Here](https://github.com/sm20/ExpressAppPractice/blob/invoiceGen/invoice/invoice.pdf) 
