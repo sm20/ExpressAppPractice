@@ -10,8 +10,8 @@ const { getInvoice } = require('../controllers/invoice')
 // as opposed to simply the index page. 
 // The second argument is the method name from the controller(or the require above)
 
-//example get request
-router.get('/', getInvoice)
+//example post request
+router.post('/', getInvoice)
 
 //export in order to be accessible from app.js
 module.exports = router;
