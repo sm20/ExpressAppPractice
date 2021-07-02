@@ -50,6 +50,7 @@
     <Content Include="data.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\GElogo.jpg" />
     <Content Include="routes\discounted.js">
       <SubType>Code</SubType>
     </Content>

@@ -36,10 +36,10 @@ app.use(bodyParser.urlencoded({ extended: false })); //parse incoming payloads o
 //middleware to parse incoming cookie header (http) and populate req.cookies property
 app.use(cookieParser());
 
-/*
+
 //middleware to serve the static resources in the public folder
 app.use(express.static(path.join(__dirname, 'public')));
-*/
+
 
 //middleware to route to api end points
 app.use('/', routes);
