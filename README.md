@@ -4,7 +4,7 @@ An example application demonstrating the implementation of a REST API. Most of t
 
 # Prerequisites
 
-	-	Install the [NodeJS Runtime- version 14.16.1](https://nodejs.org/en/download/)
+	- Install the [NodeJS Runtime- version 14.16.1](https://nodejs.org/en/download/)
 
 # Run the Application
 
