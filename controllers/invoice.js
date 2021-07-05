@@ -11,6 +11,14 @@ const emailInvoice = (req, res) => {
     const { firstName, lastName, addressLine1, addressLine2,    //customer info
         city, provinceOrState, country, postalCode, email } = req.body;
 
+    //relevant parts of address
+    let fullAddress = "";
+    if (addressLine2 === "") {
+        fullAddress = addressLine1;
+    } else {
+        fullAddress = addressLine1 + ", " + addressLine2;
+    }
+
     //Current Date
     const today = new Date();
     const date = today.toLocaleDateString();  //formatted
@@ -40,11 +48,14 @@ const emailInvoice = (req, res) => {
         .text('Bill To:').moveDown(0.25)
         .fontSize(12).font('Helvetica')
         .text(`${firstName} ${lastName}`).moveDown(0.25)
-        .text(`${addressLine1}, ${addressLine2}`).moveDown(0.25)
+        .text(`${fullAddress}`).moveDown(0.25)
         .text(`${city}, ${provinceOrState}, ${country}`).moveDown(0.25)
         .text(`${postalCode}`).moveDown(0.25)
         .text(`${email}`)
         .moveDown(3);
+
+    //table column headers
+
 
     doc.end();
 
