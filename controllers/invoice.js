@@ -7,25 +7,16 @@ var nodemailer = require('nodemailer'); //email with attachments
 //end point to create and email the invoice
 const emailInvoice = (req, res) => {
 
-    //request payload should include these json keys
- /*   const { invNum } = req.body;    //invoice number
-    const { firstName, lastName, addressLine1, addressLine2,    //customer info
-        city, provinceOrState, country, postalCode, email } = req.body;
-
-    //relevant parts of address
-    let fullAddress = "";
-    if (addressLine2 === "") {
-        fullAddress = addressLine1;
-    } else {
-        fullAddress = addressLine1 + ", " + addressLine2;
-    }
-*/
+    //incoming JSON object destructuring
     const { providerProfession, providerFirstName, providerLastName
         , invoiceNumber, invoiceDate
         , insurerName, insurerAddrLine1, insurerAddrLine2, insurerPhone, insurerCity, insurerProvince
         , clientFirstName, clientLastName, clientAddrLine1, clientAddrLine2, clientCity, clientProvince, clientPhone
         , invoiceItems
          } = req.body;
+
+    const { email } = req.body;
+
 
     //full addresses
     let insurerFullAddr = "";
@@ -46,9 +37,13 @@ const emailInvoice = (req, res) => {
     const today = new Date();
     const date = today.toLocaleDateString();  //formatted
 
+
+
+
     //Create initial PDF file
     const doc = new PDFDocument({ size: 'LETTER', autoFirstPage: false });    //new instance of PDFDocument class
     doc.pipe(fs.createWriteStream('invoice/invoice.pdf'));  //save pdf file in folder: projectRoot/invoice/
+
 
 
     //populate PDF file
@@ -81,6 +76,8 @@ const emailInvoice = (req, res) => {
         .text(`${invoiceDate}`, { underline: true })
         .moveDown();
 
+
+
     //Billing Information
 
     //columns are being used to display the information here: https://github.com/foliojs/pdfkit/issues/819
@@ -105,6 +102,8 @@ const emailInvoice = (req, res) => {
     });
     doc.moveDown(3);
 
+
+
     //Table of items charged
 
     //destructure incoming data for row 1
@@ -124,29 +123,49 @@ const emailInvoice = (req, res) => {
         prepareHeader: () => doc.font('Times-Roman').fontSize(14),
         prepareRow: (row, i) => doc.font('Times-Roman').fontSize(12)
     });
+    doc.moveDown(3);
 
 
 
-/*
-    //customer information
-    doc.fontSize(14).font('Helvetica-Bold')
-        .text('Bill To:').moveDown(0.25)
-        .fontSize(12).font('Helvetica')
-        .text(`${firstName} ${lastName}`).moveDown(0.25)
-        .text(`${fullAddress}`).moveDown(0.25)
-        .text(`${city}, ${provinceOrState}, ${country}`).moveDown(0.25)
-        .text(`${postalCode}`).moveDown(0.25)
-        .text(`${email}`)
-        .moveDown(3);
+    //calculate and display totals
+    const total = Number(amount), balanceOwing = total - Number(payment);
 
-    //table column headers
+    doc.fontSize(16).font('Times-Bold')
+        .text(`Total: $${total}`, { align: 'right' })
+        .text(`Balance Owing: $${balanceOwing}`, { align: 'right' })
+        .moveDown(5);
 
-*/
+
+
+
+    //signature area
+    doc.moveTo(doc.page.width - 50, doc.y)
+        .lineTo(doc.page.width - 225, doc.y).stroke() //horizontal line
+        .moveDown(0.4).font('Times-Roman').fontSize(14)
+        .text(`${providerProfession}, ${providerFirstName} ${providerLastName}`, { align: 'right' }).moveDown();
+
+
+
+
+    //page footer- https://stackoverflow.com/questions/42571696/how-to-add-header-and-footer-content-to-pdfkit-for-node-js
+    doc.page.margins.bottom = 0;
+    doc.fontSize(12).fillColor('#999999')
+        .text('1/1', 0.5 * (doc.page.width - 100), doc.page.height - 20,
+            {
+                width: 100,
+                align: 'center',
+                lineBreak: false,
+            });
+
+
+
+
+
     doc.end();
 
 
 
-/*
+
     //Email Invoice
 
     //create email transporter
@@ -182,12 +201,11 @@ const emailInvoice = (req, res) => {
 
 
 
-*/
+
     //response to send back to requester
     res.status(202).json({
         success: true,
-       // msg: `Invoice for ${firstName} ${lastName} emailed to ${email}`
-        msg: `success`
+       msg: `Invoice for ${clientFirstName} ${clientLastName} emailed to ${email}`
     });
 
 }
