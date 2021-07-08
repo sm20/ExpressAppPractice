@@ -41,6 +41,9 @@
     <Content Include="controllers\invoice.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="controllers\pdfkit-tables.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="controllers\people.js">
       <SubType>Code</SubType>
     </Content>

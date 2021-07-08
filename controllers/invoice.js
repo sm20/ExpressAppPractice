@@ -1,4 +1,5 @@
-const PDFDocument = require('pdfkit');  //pdfkit module for pdf generation
+//const PDFDocument = require('pdfkit');  //pdfkit module for pdf generation
+const PDFDocument = require('./pdfkit-tables');
 const fs = require('fs');   //filesystem module
 var nodemailer = require('nodemailer'); //email with attachments
 
@@ -23,6 +24,7 @@ const emailInvoice = (req, res) => {
         , invoiceNumber, invoiceDate
         , insurerName, insurerAddrLine1, insurerAddrLine2, insurerPhone, insurerCity, insurerProvince
         , clientFirstName, clientLastName, clientAddrLine1, clientAddrLine2, clientCity, clientProvince, clientPhone
+        , invoiceItems
          } = req.body;
 
     //full addresses
@@ -91,7 +93,6 @@ const emailInvoice = (req, res) => {
     let maxY = doc.y;   //initial maximum y value
     //note: track col1col2X, col1Y, col2Y to track columns individually.
 
-
     let billingInfo = ['Bill To:', 'Client:', `${insurerName}`, `${clientFirstName} ${clientLastName}`
         , `Address: ${insurerFullAddr}`, `Address: ${clientFullAddr}`
         , `Phone Number: ${insurerPhone}`, `Phone Number: ${clientPhone}`];
@@ -102,14 +103,29 @@ const emailInvoice = (req, res) => {
             doc.text(value, leftCol2, topCol_1and2, { width: colWidth2 });
         maxY = (doc.y > maxY) ? doc.y : maxY;
     });
+    doc.moveDown(3);
 
-        /*.text()
-        .text()
-        .text()
-        .text()
-        .text()
-        .text()
-        ;*/
+    //Table of items charged
+
+    //destructure incoming data for row 1
+    const { dateOfService, service, duration, attendance } = invoiceItems[0];
+    let { amount, payment } = invoiceItems[0];
+    //amount = Number(amount), payment = Number(payment);
+
+    //construct table- https://www.andronio.me/2017/09/02/pdfkit-tables/
+    const table0 = {
+        headers: ['Date', 'Service', 'Duration', 'Attendance', 'Amount', 'Payment'],
+        rows: [
+            [`${dateOfService}`, `${service}`, `${duration} min`, `${attendance}`, `$${amount}`, `$${payment}`]
+        ]
+    };
+
+    doc.table(table0, {
+        prepareHeader: () => doc.font('Times-Roman').fontSize(14),
+        prepareRow: (row, i) => doc.font('Times-Roman').fontSize(12)
+    });
+
+
 
 /*
     //customer information
